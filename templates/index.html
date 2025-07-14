@@ -1,0 +1,10 @@
+<!doctype html>
+<title>ProfesApp</title>
+<h1>Grupos</h1>
+<a href="{{ url_for('new_group') }}">Crear nuevo grupo</a> |
+<a href="{{ url_for('logout') }}">Cerrar sesión</a>
+<ul>
+  {% for g in groups %}
+    <li><a href="{{ url_for('group_detail', group_id=g.id) }}">{{ g.name }}</a></li>
+  {% endfor %}
+</ul>

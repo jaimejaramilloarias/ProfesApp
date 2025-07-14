@@ -1,0 +1,42 @@
+<!doctype html>
+<title>Grupo {{ group.name }}</title>
+<h1>Grupo {{ group.name }}</h1>
+<a href="{{ url_for('index') }}">Volver</a>
+<h2>Estudiantes</h2>
+<ul>
+  {% for s in group.students %}
+    <li>
+      {{ s.name }}
+      <form style="display:inline" method="post" action="{{ url_for('mark_attendance', student_id=s.id) }}">
+        <input type="hidden" name="date" value="{{ request.args.get('date', '') }}">
+        <select name="status">
+          <option value="presente">Presente</option>
+          <option value="ausente">Ausente</option>
+        </select>
+        <button type="submit">Marcar asistencia</button>
+      </form>
+      <form style="display:inline" method="post" action="{{ url_for('add_grade', student_id=s.id) }}">
+        <input name="assignment" placeholder="Tarea" required>
+        <input name="grade" placeholder="Nota" required>
+        <button type="submit">Agregar nota</button>
+      </form>
+    </li>
+  {% endfor %}
+</ul>
+<h3>Agregar estudiante</h3>
+<form method="post" action="{{ url_for('add_student', group_id=group.id) }}">
+  <input name="name" placeholder="Nombre del estudiante" required>
+  <button type="submit">Agregar</button>
+</form>
+<h2>Subir trabajo</h2>
+<form method="post" action="{{ url_for('upload_assignment', group_id=group.id) }}" enctype="multipart/form-data">
+  <input name="name" placeholder="Nombre del trabajo" required>
+  <input type="file" name="file" required>
+  <button type="submit">Subir</button>
+</form>
+<ul>
+  {% for a in group.assignments %}
+    <li>{{ a.name }} - {{ a.filename }}</li>
+  {% endfor %}
+</ul>
+
