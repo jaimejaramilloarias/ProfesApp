@@ -1,0 +1,9 @@
+<!doctype html>
+<title>Login</title>
+<h1>Login</h1>
+<form method="post">
+  <input name="username" placeholder="Username" required><br>
+  <input name="password" type="password" placeholder="Password" required><br>
+  <button type="submit">Login</button>
+</form>
+<p>No tienes cuenta? <a href="{{ url_for('register') }}">Regístrate</a></p>

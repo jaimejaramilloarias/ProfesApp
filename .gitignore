@@ -1,0 +1,4 @@
+__pycache__/
+profesapp.db
+uploads/
+*.pyc
